@@ -15,9 +15,22 @@
                     <li class="nav-item">
                         <a class="nav-link" href="service.html">Daftar</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="modal" data-target="#login"> <i class="fa fa-user" aria-hidden="true"></i> Login</a>
-                    </li>
+                    <?php
+                    if ($_SESSION['nama'] == null) {
+                    ?>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="modal" data-target="#login"> <i class="fa fa-user" aria-hidden="true"></i> Login</a>
+                        </li>
+                    <?php
+                    } else {
+                    ?>
+                        <li class="nav-item">
+                            <a class="nav-link" href="controller/logout.php">Logout</a>
+                        </li>
+                    <?php
+                        echo "<h4 style='color:white;'>" . $_SESSION['nama'] . "</h4>";
+                    }
+                    ?>
                 </ul>
             </div>
         </nav>

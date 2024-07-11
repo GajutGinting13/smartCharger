@@ -5,7 +5,10 @@
     <?php
     $judul = "Pachuraji";
     $page = "Scan";
-    include 'head.php'; ?>
+    include 'head.php';
+    session_start();
+    $nama = $_SESSION['nama'];
+    ?>
     <style>
         #video-container {
             position: relative;
@@ -98,9 +101,9 @@
             });
             return decrypted.toString(CryptoJS.enc.Utf8);
         }
-        // const encryptedText = encryptText("smartcharger/controller/validasi.php");
+        // const encryptedText = encryptText("smartcharger/controller/validasi.php?station=1");
         // console.log(encryptedText);
-        // Hasil Enkripsi = "ZEWop2GUZ/4ix1uWc9jK6BWiBw3AMfv7BuYp5mzzp6ZVZhKbj48uCUQV/yMO1kN1";
+        // Hasil Enkripsi = "ZEWop2GUZ/4ix1uWc9jK6BWiBw3AMfv7BuYp5mzzp6bNjd4maXdsyWs69UKlIC9s";
         // Mulai Scan
         const video = document.getElementById('qr-video');
         let scanner = new Instascan.Scanner({
@@ -109,9 +112,9 @@
         });
 
         scanner.addListener('scan', function(content) {
-            if (content == "ZEWop2GUZ/4ix1uWc9jK6BWiBw3AMfv7BuYp5mzzp6ZVZhKbj48uCUQV/yMO1kN1") {
+            if (content == "ZEWop2GUZ/4ix1uWc9jK6BWiBw3AMfv7BuYp5mzzp6bNjd4maXdsyWs69UKlIC9s") {
                 const decryptedText = decryptText(content);
-                const url = "http://localhost/" + content + "&paket=<?php echo $_GET['paket'] ?>";
+                const url = "http://localhost/" + content + "&paket=<?php echo $_GET['paket'] ?>&nama=<?php echo $nama ?>";
                 window.open(url);
             } else {
                 alert("QRcode Tidak Dikenal.");
